@@ -1,12 +1,12 @@
 <?php
 
-namespace VendorName\Skeleton\Commands;
+namespace Karabin\UserInvitation\Commands;
 
 use Illuminate\Console\Command;
 
-class SkeletonCommand extends Command
+class UserInvitationCommand extends Command
 {
-    public $signature = 'skeleton';
+    public $signature = 'laravel-user-invitation';
 
     public $description = 'My command';
 
