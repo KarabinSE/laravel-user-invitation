@@ -16,7 +16,7 @@ class UserInviteTest extends TestCase
         User::reGuard();
 
         // Act
-        $token = $user->sendInvitation();
+        $token = $user->createTokenForRegistration();
 
         // Assert
         $this->assertIsString($token, $token);
@@ -35,5 +35,31 @@ class UserInviteTest extends TestCase
 
         // Assert
         Notification::assertSentTimes(InvitationNotification::class, 1);
+    }
+
+    public function test_it_can_use_an_invite_token_to_register()
+    {
+        // Arrange
+        User::unguard();
+        $user = User::create(['name' => 'Tester', 'email' => 'albin@karabin.se', 'password' => bcrypt('secret')]);
+        User::reGuard();
+        $token = $user->createTokenForRegistration();
+
+        // Act
+        $return = $user->registerViaInvite($token, [
+            'email' => 'albin@karabin.se',
+            'password' => 'a_super_Secret_password1',
+            'password_confirmation' => 'a_super_Secret_password1',
+        ]);
+
+        // Assert
+        $this->assertEquals($return, 'passwords.reset');
+        $this->assertDatabaseHas('users', [
+            'id' => $user->id,
+        ]);
+        $this->assertDatabaseMissing('users', [
+            'id' => $user->id,
+            'invite_accepted_at' => null,
+        ]);
     }
 }

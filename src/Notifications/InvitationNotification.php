@@ -47,9 +47,9 @@ class InvitationNotification extends Notification
         ], false));
 
         return (new MailMessage)
-            ->subject('Registrerat konto')
-            ->line('Du får det här meddelandet för att någon registrerat ett konto åt dig i MoodMap. Klicka på länken nedan för att slutföra registreringen genom att välja ett lösenord.')
-            ->action('Slutför registrering', $url);
+            ->subject(config('user-invitation.notification_subject'))
+            ->line(config('user-invitation.notification_text'))
+            ->action(config('user-invitation.notification_action_text'), $url);
     }
 
     /**

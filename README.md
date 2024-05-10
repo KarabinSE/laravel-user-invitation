@@ -7,14 +7,6 @@
 
 This is where your description should go. Limit it to a paragraph or two. Consider adding a small example.
 
-## Support us
-
-[<img src="https://github-ads.s3.eu-central-1.amazonaws.com/laravel-user-invitation.jpg?t=1" width="419px" />](https://spatie.be/github-ad-click/laravel-user-invitation)
-
-We invest a lot of resources into creating [best in class open source packages](https://spatie.be/open-source). You can support us by [buying one of our paid products](https://spatie.be/open-source/support-us).
-
-We highly appreciate you sending us a postcard from your hometown, mentioning which of our package(s) you are using. You'll find our address on [our contact page](https://spatie.be/about-us). We publish all received postcards on [our virtual postcard wall](https://spatie.be/open-source/postcards).
-
 ## Installation
 
 You can install the package via composer:
@@ -40,8 +32,19 @@ This is the contents of the published config file:
 
 ```php
 return [
-    'expire' => env('USER_INVITATION_EXPIRE', (60 * 24) * 7), // Default 7 days
+    'notification_class' => \Karabin\UserInvitation\Notifications\InvitationNotification::class,
+    'notification_subject' => 'Registered account',
+    'notification_text' => "You're receiving this message because someone has registered an account for you on ".config('app.name').'. Click the link below to complete the registration by choosing a password',
+    'notification_action_text' => 'Complete registration',
+    'route' => 'register-user.create',
+    'users_registration' => [
+        'provider' => 'users',
+        'table' => env('AUTH_PASSWORD_RESET_TOKEN_TABLE', 'password_reset_tokens'),
+        'expire' => env('USER_INVITATION_EXPIRE', (60 * 24) * 7),
+        'throttle' => 60,
+    ],
 ];
+
 ```
 
 Optionally, you can publish the views using
@@ -52,20 +55,30 @@ php artisan vendor:publish --tag="laravel-user-invitation-views"
 
 ## Usage
 
+Add the trait
 ```php
-    'passwords' => [
-        'users' => [
-            'provider' => 'users',
-            'table' => 'password_resets',
-            'expire' => 60 * 24, //24 hours as requested
-            'throttle' => 60,
-        ],
-        'users_registration' => [
-            'provider' => 'users',
-            'table' => 'password_resets',
-            'expire' => (60 * 24) * 365, //1 year
-        ],
-    ],
+<?php
+
+namespace Karabin\UserInvitation\Tests\Fixtures;
+
+//...
+use Karabin\UserInvitation\Traits\Inviteable;
+
+class User extends AuthUser
+{
+    use Inviteable, Notifiable;
+}
+
+```
+
+This gives access to two functions
+
+```php
+<?php
+
+$user->createTokenForRegistration() // Returns a token string
+
+$user->sendInvitation() // Creates a token and sends a notification
 
 ```
 
