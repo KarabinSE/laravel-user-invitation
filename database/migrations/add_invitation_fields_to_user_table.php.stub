@@ -13,4 +13,16 @@ return new class extends Migration
             $table->timestamp('invite_sent_at')->after('remember_token')->nullable();
         });
     }
+
+    /**
+     * Reverse the migrations.
+     *
+     * @return void
+     */
+    public function down()
+    {
+        Schema::table('users', function (Blueprint $table) {
+            $table->dropColumn('invite_accepted_at', 'invite_sent_at');
+        });
+    }
 };

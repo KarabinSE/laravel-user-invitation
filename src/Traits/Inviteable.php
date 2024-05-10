@@ -12,6 +12,22 @@ use Karabin\UserInvitation\Passwords\PasswordBrokerManager;
 
 trait Inviteable
 {
+    /**
+     * Get the attributes that should be cast.
+     *
+     * @return array<string, string>
+     */
+    protected function casts(): array
+    {
+        return [
+            'email_verified_at' => 'datetime',
+            'invite_sent_at' => 'datetime',
+            'invite_accepted_at' => 'datetime',
+            'email_verified_at' => 'datetime',
+            'password' => 'hashed',
+        ];
+    }
+
     public function createTokenForRegistration(): string
     {
         $token = (new PasswordBrokerManager(app()))
