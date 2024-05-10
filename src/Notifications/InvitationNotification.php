@@ -39,7 +39,7 @@ class InvitationNotification extends Notification
      */
     public function toMail($notifiable)
     {
-        $route = 'register-tenant-user.create';
+        $route = config('user-invitation.route');
 
         $url = url(route($route, [
             'token' => $this->token,
