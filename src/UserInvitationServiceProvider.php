@@ -17,6 +17,8 @@ class UserInvitationServiceProvider extends ServiceProvider
             $this->publishes([
                 __DIR__.'/../config/user-invitation.php' => config_path('user-invitation.php'),
             ], 'config');
+
+            $this->loadMigrationsFrom([realpath(__DIR__.'/../database/migrations')]);
         }
     }
 
