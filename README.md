@@ -1,11 +1,8 @@
 # User invitation for Laravel using built in PasswordBroker
 
-[![Latest Version on Packagist](https://img.shields.io/packagist/v/karabinse/laravel-user-invitation.svg?style=flat-square)](https://packagist.org/packages/karabinse/laravel-user-invitation)
-[![GitHub Tests Action Status](https://img.shields.io/github/actions/workflow/status/karabinse/laravel-user-invitation/run-tests.yml?branch=main&label=tests&style=flat-square)](https://github.com/karabinse/laravel-user-invitation/actions?query=workflow%3Arun-tests+branch%3Amain)
-[![GitHub Code Style Action Status](https://img.shields.io/github/actions/workflow/status/karabinse/laravel-user-invitation/fix-php-code-style-issues.yml?branch=main&label=code%20style&style=flat-square)](https://github.com/karabinse/laravel-user-invitation/actions?query=workflow%3A"Fix+PHP+code+style+issues"+branch%3Amain)
-[![Total Downloads](https://img.shields.io/packagist/dt/karabinse/laravel-user-invitation.svg?style=flat-square)](https://packagist.org/packages/karabinse/laravel-user-invitation)
+[![Latest Version on Packagist](https://img.shields.io/packagist/v/karabinse/laravel-user-invitation.svg)](https://packagist.org/packages/karabinse/laravel-user-invitation)
+[![GitHub Tests Action Status](https://img.shields.io/github/actions/workflow/status/karabinse/laravel-user-invitation/run-tests.yml?branch=main&label=tests)](https://github.com/karabinse/laravel-user-invitation/actions?query=workflow%3Arun-tests+branch%3Amain)
 
-This is where your description should go. Limit it to a paragraph or two. Consider adding a small example.
 
 ## Installation
 
