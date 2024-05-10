@@ -8,6 +8,7 @@ use Illuminate\Auth\Events\PasswordReset;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Password;
 use Illuminate\Support\Str;
+use Illuminate\Validation\ValidationException;
 use Karabin\UserInvitation\Passwords\PasswordBrokerManager;
 
 trait Inviteable
@@ -65,6 +66,12 @@ trait Inviteable
             }
         );
 
-        return $status;
+        if ($status == Password::PASSWORD_RESET) {
+            return trans($status);
+        }
+
+        throw ValidationException::withMessages([
+            'email' => [trans($status)],
+        ]);
     }
 }
