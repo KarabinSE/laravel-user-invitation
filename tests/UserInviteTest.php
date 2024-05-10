@@ -53,7 +53,7 @@ class UserInviteTest extends TestCase
         ]);
 
         // Assert
-        $this->assertEquals($return, 'passwords.reset');
+        $this->assertEquals($return, trans('passwords.reset'));
         $this->assertDatabaseHas('users', [
             'id' => $user->id,
         ]);
