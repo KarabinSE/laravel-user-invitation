@@ -21,5 +21,8 @@ class WorkbenchServiceProvider extends ServiceProvider
     public function boot(): void
     {
         Route::view('/', 'welcome');
+        Route::get('register-by-invitation', function () {
+            return response()->json(['message' => 'OK']);
+        })->name('register-user.create');
     }
 }

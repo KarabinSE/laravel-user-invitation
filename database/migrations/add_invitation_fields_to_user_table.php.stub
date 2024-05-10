@@ -9,8 +9,8 @@ return new class extends Migration
     public function up()
     {
         Schema::table('users', function (Blueprint $table) {
-            $table->timestamp('invitation_accepted_at')->after('remember_token')->nullable();
-            $table->timestamp('invitation_sent_at')->after('remember_token')->nullable();
+            $table->timestamp('invite_accepted_at')->after('remember_token')->nullable();
+            $table->timestamp('invite_sent_at')->after('remember_token')->nullable();
         });
     }
 };

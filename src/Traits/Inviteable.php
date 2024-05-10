@@ -2,7 +2,9 @@
 
 namespace Karabin\UserInvitation\Traits;
 
-use Illuminate\Auth\Passwords\PasswordBrokerManager;
+// use Illuminate\Auth\Passwords\PasswordBrokerManager;
+use Karabin\UserInvitation\Notifications\InvitationNotification;
+use Karabin\UserInvitation\Passwords\PasswordBrokerManager;
 
 trait Inviteable
 {

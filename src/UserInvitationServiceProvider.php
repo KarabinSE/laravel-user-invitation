@@ -2,21 +2,30 @@
 
 namespace Karabin\UserInvitation;
 
-use Spatie\LaravelPackageTools\Package;
-use Spatie\LaravelPackageTools\PackageServiceProvider;
+use Illuminate\Support\ServiceProvider;
 
-class UserInvitationServiceProvider extends PackageServiceProvider
+class UserInvitationServiceProvider extends ServiceProvider
 {
-    public function configurePackage(Package $package): void
+    /**
+     * Boot the service provider.
+     *
+     * @return void
+     */
+    public function boot()
     {
-        /*
-         * This class is a Package Service Provider
-         *
-         * More info: https://github.com/spatie/laravel-package-tools
-         */
-        $package
-            ->name('laravel-user-invitation')
-            ->hasConfigFile()
-            ->hasMigration('add_invitation_fields_to_user_table');
+        if ($this->app->runningInConsole()) {
+            $this->publishes([
+                __DIR__.'/../config/user-invitation.php' => config_path('user-invitation.php'),
+            ], 'config');
+        }
+    }
+
+    /**
+     * Register the service provider.
+     */
+    public function register(): void
+    {
+        $this->mergeConfigFrom(__DIR__.'/../config/user-invitation.php', 'user-invitation');
+        $this->mergeConfigFrom(__DIR__.'/../config/user-invitation.php', 'auth.passwords');
     }
 }
